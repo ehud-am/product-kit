@@ -4,6 +4,47 @@ The product management counterpart to [spec-kit](https://github.com/github/spec-
 
 While spec-kit handles engineering specifications, pm-kit handles the **product narrative** — the domain context, press releases, FAQs, and requirements that define *what* you're building and *why*, before spec-kit defines *how*.
 
+## Installation
+
+```sh
+curl -sSL https://raw.githubusercontent.com/ehud-am/pm-kit/main/install.sh | sh
+```
+
+This installs the four pm-kit commands into `.claude/commands/` and the four templates into `.product/templates/` in your current directory. Safe to re-run — always installs the latest version.
+
+### Manual install
+
+If you prefer to copy files yourself (or don't have `curl`):
+
+```sh
+# From a cloned pm-kit repo:
+cp .claude/commands/pm-*.md /your-project/.claude/commands/
+cp -r .product/templates /your-project/.product/
+```
+
+## Usage in Claude Code
+
+In any Claude Code chat, type a command followed by your input:
+
+```
+/pm-domain We're building a B2B SaaS tool that helps logistics managers track last-mile delivery in real time.
+
+/pm-press Write the press release for our first release — route optimization for small fleets.
+
+/pm-faq
+
+/pm-align
+```
+
+Each command reads text after the `/command-name` as its input. Commands with no required input (like `/pm-faq` and `/pm-align`) can be invoked with no arguments — they read context from the `.product/` files automatically.
+
+| Command | When to use |
+|---------|-------------|
+| `/pm-domain` | First — establish who your users are, what problem you're solving, and who the competitors are |
+| `/pm-press` | Write a press release as if the product has already shipped |
+| `/pm-faq` | Generate questions that challenge every press release claim |
+| `/pm-align` | After engineering specs exist — reconcile product docs with what was actually built |
+
 ## How It Works
 
 pm-kit creates a `.product/` folder in your project that maintains a living, cumulative view of the product across releases. Each document grows over time, telling the full story of the project from its first release to the one currently under development.
@@ -55,15 +96,6 @@ The methodology is Amazon's PR/FAQ approach:
 - Start with the **customer experience** (press release), not the technical solution
 - Force hard questions early (FAQ) before committing engineering resources
 - Let the press release be the **contract** — if you can't write a compelling press release, the feature isn't ready to build
-
-## Installation
-
-pm-kit ships as Claude Code commands. To install:
-
-1. Copy the `.claude/commands/pm-*.md` files into your project's `.claude/commands/` directory
-2. Copy the `.product/templates/` directory into your project root
-
-The commands will be available as `/pm-domain`, `/pm-press`, `/pm-faq`, and `/pm-align` in Claude Code.
 
 ## Requirements
 

@@ -33,6 +33,7 @@ specs/                   # Feature specs (spec-kit output)
 - No trailing whitespace; single blank line between sections
 
 ## Recent Changes
+- 002-install-script-readme: Added [if applicable, e.g., PostgreSQL, CoreData, files or N/A]
 
 - 001-pm-kit-commands: Initial four commands and four templates
 
