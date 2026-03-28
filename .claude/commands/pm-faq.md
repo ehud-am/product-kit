@@ -27,8 +27,9 @@ You are creating or updating the FAQ document at `.product/faq.md`. This documen
 2. **Load context**: Read the following files if they exist:
    - `.product/domain.md` — for domain context and terminology
    - `.product/press.md` — the press release claims that FAQs must challenge
-   - `.product/features.md` — for feature scope context
-3. **Check for existing FAQ doc**: Read `.product/faq.md` if it exists.
+3. **Guard — no press release**: If `.product/press.md` does not exist, stop and inform the user:
+   "FAQs require a press release to challenge. Run `/pm-press` first to write the press release for the upcoming release."
+4. **Check for existing FAQ doc**: Read `.product/faq.md` if it exists.
    - If it exists with content, identify whether the user wants to:
      - **Add** new FAQs to the current upcoming release
      - **Update** existing FAQs
@@ -67,7 +68,7 @@ You are creating or updating the FAQ document at `.product/faq.md`. This documen
    - Maintain the release-based organization
 
 4. **If finalizing a release and starting the next**:
-   - Change the top section's `*(upcoming)*` to the actual release date
+   - Change the top section's `*(upcoming)*` to the actual release date — use the **same release name and date** as the corresponding entry in `press.md` to keep the two files in sync
    - Insert a new upcoming release section above it
    - The new section starts empty, ready for the next press release's FAQs
 

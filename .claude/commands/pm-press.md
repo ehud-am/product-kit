@@ -58,6 +58,7 @@ You are creating or updating the press release document at `.product/press.md`. 
    - Change the top entry's `*(upcoming)*` to the actual release date
    - Insert a new upcoming release section above it using the press release template structure
    - The new entry becomes the top of the document
+   - Note the release name and date used — `faq.md` must use the **same release name and date** when finalized; inform the user to run `/pm-faq` to finalize the matching FAQ section
 
 5. **Quality checks**:
    - Press release reads as if the product has already shipped (past/present tense)
