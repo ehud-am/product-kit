@@ -24,11 +24,11 @@
 
 **Purpose**: Initialize the TypeScript/npm CLI package and move the repo toward the planned structure
 
-- [ ] T001 Create npm package metadata and CLI bin entry in package.json
-- [ ] T002 Configure TypeScript compiler options and path layout in tsconfig.json
-- [ ] T003 [P] Create root CLI entrypoint and command registration shell in src/cli/main.ts
-- [ ] T004 [P] Create initial source directory structure placeholders in src/types/index.ts
-- [ ] T005 [P] Create fixture workspace scaffolding for CLI integration scenarios in tests/fixtures/.gitkeep
+- [X] T001 Create npm package metadata and CLI bin entry in package.json
+- [X] T002 Configure TypeScript compiler options and path layout in tsconfig.json
+- [X] T003 [P] Create root CLI entrypoint and command registration shell in src/cli/main.ts
+- [X] T004 [P] Create initial source directory structure placeholders in src/types/index.ts
+- [X] T005 [P] Create fixture workspace scaffolding for CLI integration scenarios in tests/fixtures/.gitkeep
 
 ---
 
@@ -38,15 +38,15 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T006 Create assistant adapter contract types in src/adapters/types.ts
-- [ ] T007 [P] Define static asset registry and target mappings in src/core/assets/registry.ts
-- [ ] T008 [P] Implement manifest schema and state helpers in src/core/state/manifest.ts
-- [ ] T009 [P] Implement project root and filesystem utility helpers in src/core/fs/project.ts
-- [ ] T010 [P] Implement shared CLI output and error formatting helpers in src/cli/output/reporter.ts
-- [ ] T011 Implement Claude adapter path rules in src/adapters/claude.ts
-- [ ] T012 [P] Implement Codex adapter path rules in src/adapters/codex.ts
-- [ ] T013 Create target resolution and adapter selection service in src/core/orchestration/targets.ts
-- [ ] T014 Create packaged asset source tree for Claude, Codex, and shared templates in assets/.gitkeep
+- [X] T006 Create assistant adapter contract types in src/adapters/types.ts
+- [X] T007 [P] Define static asset registry and target mappings in src/core/assets/registry.ts
+- [X] T008 [P] Implement manifest schema and state helpers in src/core/state/manifest.ts
+- [X] T009 [P] Implement project root and filesystem utility helpers in src/core/fs/project.ts
+- [X] T010 [P] Implement shared CLI output and error formatting helpers in src/cli/output/reporter.ts
+- [X] T011 Implement Claude adapter path rules in src/adapters/claude.ts
+- [X] T012 [P] Implement Codex adapter path rules in src/adapters/codex.ts
+- [X] T013 Create target resolution and adapter selection service in src/core/orchestration/targets.ts
+- [X] T014 Create packaged asset source tree for Claude, Codex, and shared templates in assets/.gitkeep
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -60,12 +60,12 @@
 
 ### Implementation for User Story 1
 
-- [ ] T015 [P] [US1] Create Claude slash-command asset files under assets/claude/commands/
-- [ ] T016 [P] [US1] Create Codex slash-command asset files under assets/codex/commands/
-- [ ] T017 [P] [US1] Create shared product template asset files under assets/product/templates/
-- [ ] T018 [US1] Implement add-operation orchestration for asset copy and manifest writes in src/core/orchestration/add.ts
-- [ ] T019 [US1] Implement `pmkit add` command wiring in src/cli/commands/add.ts
-- [ ] T020 [US1] Document global and local install plus `pmkit add` flows in README.md
+- [X] T015 [P] [US1] Create Claude slash-command asset files under assets/claude/commands/
+- [X] T016 [P] [US1] Create Codex slash-command asset files under assets/codex/commands/
+- [X] T017 [P] [US1] Create shared product template asset files under assets/product/templates/
+- [X] T018 [US1] Implement add-operation orchestration for asset copy and manifest writes in src/core/orchestration/add.ts
+- [X] T019 [US1] Implement `pmkit add` command wiring in src/cli/commands/add.ts
+- [X] T020 [US1] Document global and local install plus `pmkit add` flows in README.md
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -79,10 +79,10 @@
 
 ### Implementation for User Story 2
 
-- [ ] T021 [US2] Implement remove-operation orchestration with manifest-scoped deletion in src/core/orchestration/remove.ts
-- [ ] T022 [US2] Implement shared-asset retention and final-cleanup rules in src/core/orchestration/shared-assets.ts
-- [ ] T023 [US2] Implement `pmkit remove` command wiring in src/cli/commands/remove.ts
-- [ ] T024 [US2] Add README coverage for `pmkit remove` behavior and safe file ownership semantics in README.md
+- [X] T021 [US2] Implement remove-operation orchestration with manifest-scoped deletion in src/core/orchestration/remove.ts
+- [X] T022 [US2] Implement shared-asset retention and final-cleanup rules in src/core/orchestration/shared-assets.ts
+- [X] T023 [US2] Implement `pmkit remove` command wiring in src/cli/commands/remove.ts
+- [X] T024 [US2] Add README coverage for `pmkit remove` behavior and safe file ownership semantics in README.md
 
 **Checkpoint**: At this point, User Stories 1 and 2 should both work independently
 
@@ -96,13 +96,13 @@
 
 ### Implementation for User Story 3
 
-- [ ] T025 [US3] Implement health evaluation and issue classification in src/core/orchestration/check.ts
-- [ ] T026 [US3] Implement detailed diagnostic report generation in src/core/orchestration/doctor.ts
-- [ ] T027 [P] [US3] Implement `pmkit check` command wiring in src/cli/commands/check.ts
-- [ ] T028 [P] [US3] Implement `pmkit doctor` command wiring in src/cli/commands/doctor.ts
-- [ ] T029 [P] [US3] Implement `pmkit version` command wiring in src/cli/commands/version.ts
-- [ ] T030 [P] [US3] Implement `pmkit help` command customization in src/cli/commands/help.ts
-- [ ] T031 [US3] Document `check`, `doctor`, `version`, and `help` usage in README.md
+- [X] T025 [US3] Implement health evaluation and issue classification in src/core/orchestration/check.ts
+- [X] T026 [US3] Implement detailed diagnostic report generation in src/core/orchestration/doctor.ts
+- [X] T027 [P] [US3] Implement `pmkit check` command wiring in src/cli/commands/check.ts
+- [X] T028 [P] [US3] Implement `pmkit doctor` command wiring in src/cli/commands/doctor.ts
+- [X] T029 [P] [US3] Implement `pmkit version` command wiring in src/cli/commands/version.ts
+- [X] T030 [P] [US3] Implement `pmkit help` command customization in src/cli/commands/help.ts
+- [X] T031 [US3] Document `check`, `doctor`, `version`, and `help` usage in README.md
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -112,11 +112,11 @@
 
 **Purpose**: Finish integration details that cut across multiple user stories
 
-- [ ] T032 [P] Add package scripts for build, typecheck, and CLI execution in package.json
-- [ ] T033 [P] Create Vitest configuration for unit and integration execution in vitest.config.ts
-- [ ] T034 Add CLI fixture-based integration coverage for add/remove/check flows in tests/integration/cli.spec.ts
-- [ ] T035 [P] Add manifest and adapter unit coverage in tests/unit/manifest.spec.ts
-- [ ] T036 Run and reconcile quickstart validation scenarios in specs/003-prime-time-cli/quickstart.md
+- [X] T032 [P] Add package scripts for build, typecheck, and CLI execution in package.json
+- [X] T033 [P] Create Vitest configuration for unit and integration execution in vitest.config.ts
+- [X] T034 Add CLI fixture-based integration coverage for add/remove/check flows in tests/integration/cli.spec.ts
+- [X] T035 [P] Add manifest and adapter unit coverage in tests/unit/manifest.spec.ts
+- [X] T036 Run and reconcile quickstart validation scenarios in specs/003-prime-time-cli/quickstart.md
 
 ---
 

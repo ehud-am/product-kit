@@ -4,14 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-### Planned
+### Added
 
-- Introduce a TypeScript-based npm CLI named `pmkit`
-- Add dual support for Claude Code and Codex
-- Standardize assistant command names around `/pmkit-*`
-- Add project lifecycle commands for `add`, `remove`, `check`, and `doctor`
-- Add manifest-based ownership tracking for safe project file removal
-- Update onboarding docs toward global npm install as the default recommended path
+- TypeScript-based `pmkit` CLI scaffolding with `add`, `remove`, `check`, `doctor`, `help`, and `version`
+- Claude Code and Codex adapter structure with manifest-based ownership tracking
+- Versioned `assets/` tree for `/pmkit-*` assistant commands and shared `.product` templates
+- Vitest-based unit and integration coverage for manifest and CLI lifecycle flows
+
+### Changed
+
+- README now documents the npm CLI workflow alongside the legacy shell installer
+- `.npmignore` and package metadata prepared for npm distribution
 
 ## [2026-03-29]
 

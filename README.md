@@ -6,23 +6,55 @@ While spec-kit handles engineering specifications, pm-kit handles the product na
 
 ## Current Status
 
-The repository currently ships a Claude Code-focused install flow based on `install.sh` and the `/pm-*` command set.
+pm-kit now includes a TypeScript-based CLI named `pmkit` for managing project integrations, alongside the older shell installer for the legacy Claude-only workflow.
 
-The next major version is planned to introduce:
-- an npm CLI named `pmkit`
-- dual support for Claude Code and Codex
-- `/pmkit-*` command names inside supported assistants
-- project-level `add`, `remove`, `check`, and `doctor` operations
-
-Until that release is implemented, the instructions below describe the currently available workflow.
+Current direction:
+- `pmkit` is the primary integration surface going forward
+- Claude Code and Codex are both supported targets
+- installed assistant commands use the `/pmkit-*` naming convention
+- project lifecycle commands are `add`, `remove`, `check`, `doctor`, `help`, and `version`
 
 ## Installation
+
+### Preferred CLI workflow
+
+From a local clone of this repository:
+
+```sh
+npm install
+npm run build
+npm install -g .
+```
+
+Then inside any target project:
+
+```sh
+pmkit add claude
+pmkit add codex
+pmkit add both
+pmkit check both
+```
+
+### Local project install
+
+If you want the CLI pinned in a single repo instead of installed globally:
+
+```sh
+npm install
+npm run build
+npm install --save-dev .
+npx pmkit add claude
+```
+
+### Legacy shell installer
+
+The older shell installer is still available for the legacy Claude-only `/pm-*` workflow:
 
 ```sh
 curl -sSL https://raw.githubusercontent.com/ehud-am/pm-kit/main/install.sh | sh
 ```
 
-This installs the four pm-kit commands into `.claude/commands/` and the four templates into `.product/templates/` in your current directory. Safe to re-run; it always installs the latest repository version of the current shell-based setup.
+This installs the four legacy pm-kit commands into `.claude/commands/` and the four templates into `.product/templates/` in your current directory.
 
 ### Manual install
 
@@ -33,7 +65,42 @@ cp .claude/commands/pm-*.md /your-project/.claude/commands/
 cp -r .product/templates /your-project/.product/
 ```
 
-## Usage in Claude Code
+## Usage with `pmkit`
+
+Project integration commands:
+
+```text
+pmkit add claude
+pmkit add codex
+pmkit add both
+pmkit remove claude
+pmkit check both
+pmkit doctor both
+pmkit version
+pmkit help
+```
+
+What they do:
+
+| Command | Purpose |
+|---------|---------|
+| `pmkit add <target>` | Add pmkit-managed assistant commands and shared templates to the current project |
+| `pmkit remove <target>` | Remove only pmkit-managed files for the selected target |
+| `pmkit check [target]` | Validate that managed integrations are present and healthy |
+| `pmkit doctor [target]` | Show richer diagnostics and recovery guidance |
+| `pmkit version` | Print the installed CLI version |
+| `pmkit help` | Show command help and examples |
+
+After adding an integration, use the installed slash commands inside the assistant:
+
+```text
+/pmkit-domain ...
+/pmkit-press ...
+/pmkit-faq
+/pmkit-align
+```
+
+## Legacy Usage in Claude Code
 
 In any Claude Code chat, type a command followed by your input:
 
@@ -56,26 +123,12 @@ Each command reads text after the command name as its input. Commands with no re
 | `/pm-faq` | Generate questions that challenge every press release claim |
 | `/pm-align` | After engineering specs exist, reconcile product docs with what is actually being built |
 
-## Planned vNext Direction
+## Assistant Targets
 
-The planned next version of pm-kit is centered on a single npm-distributed CLI:
-
-```text
-pmkit add claude
-pmkit add codex
-pmkit add both
-pmkit remove claude
-pmkit check both
-pmkit doctor both
-```
-
-Planned direction:
-- global npm install will be the default recommended path
-- local project install will also be supported
-- assistant integrations will be treated as project assets that pmkit adds and removes safely
-- Codex and Claude Code will each receive their own `/pmkit-*` command files
-
-This direction is planned and documented, but not yet implemented in the current repository state.
+| Target | Command directory | Slash commands |
+|--------|-------------------|----------------|
+| Claude Code | `.claude/commands/` | `/pmkit-domain`, `/pmkit-press`, `/pmkit-faq`, `/pmkit-align` |
+| Codex | `.Codex/commands/` | `/pmkit-domain`, `/pmkit-press`, `/pmkit-faq`, `/pmkit-align` |
 
 ## How It Works
 
@@ -97,11 +150,11 @@ pm-kit creates a `.product/` folder in your project that maintains a living, cum
   (context)     (promise)      (challenge)     (engineer)           (reconcile)
 ```
 
-1. `/pm-domain` establishes the domain context: who the users are, what problem matters, and who the alternatives are.
-2. `/pm-press` writes a press release as if the next release has already shipped.
-3. `/pm-faq` challenges the press release with hard questions from customers and stakeholders.
+1. `/pmkit-domain` or `/pm-domain` establishes the domain context: who the users are, what problem matters, and who the alternatives are.
+2. `/pmkit-press` or `/pm-press` writes a press release as if the next release has already shipped.
+3. `/pmkit-faq` or `/pm-faq` challenges the press release with hard questions from customers and stakeholders.
 4. `/speckit.specify` hands off to spec-kit for engineering specifications.
-5. `/pm-align` reconciles product docs with the final engineering scope.
+5. `/pmkit-align` or `/pm-align` reconciles product docs with the final engineering scope.
 
 ## Key Concepts
 
@@ -122,9 +175,9 @@ The methodology is Amazon's PR/FAQ approach:
 
 ## Requirements
 
-- [Claude Code](https://claude.ai/code) for the current install flow
+- Node.js and npm for the `pmkit` CLI workflow
+- [Claude Code](https://claude.ai/code) and/or Codex for assistant integration targets
 - [spec-kit](https://github.com/github/spec-kit) for the `/speckit.specify` portion of the workflow
-- Node.js and npm will be required once the planned `pmkit` CLI release lands
 
 ## Changelog
 
