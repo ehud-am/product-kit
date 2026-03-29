@@ -24,6 +24,8 @@ description: "Task list template for feature implementation"
 - **Web app**: `backend/src/`, `frontend/src/`
 - **Mobile**: `api/src/`, `ios/src/` or `android/src/`
 - Paths shown below assume single project - adjust based on plan.md structure
+- Always use repository-relative paths like `src/app.ts` or `specs/feature/tasks.md`
+- Never use absolute machine-specific paths like `/Users/...` or `C:\...`
 
 <!-- 
   ============================================================================
