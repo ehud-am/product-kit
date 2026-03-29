@@ -2,7 +2,7 @@
 description: Provide domain knowledge as background context for the project.
 handoffs:
   - label: Write Press Release
-    agent: product-kit-press
+    agent: prd-kit-press
     prompt: Write the press release for the next release
 ---
 
@@ -27,6 +27,6 @@ You are creating or updating the domain knowledge document at `.product/domain.m
 
 ### Execution Flow
 
-1. **Parse user input**: The text after `/product-kit-domain` is the domain context the user wants to capture.
-2. Create or update `.product/domain.md` using the same quality checks and guidelines as the existing product-kit domain workflow.
-3. Suggest `/product-kit-press` as the next step when appropriate.
+1. **Parse user input**: The text after `/prd-kit-domain` is the domain context the user wants to capture.
+2. Create or update `.product/domain.md` using the same quality checks and guidelines as the existing prd-kit domain workflow.
+3. Suggest `/prd-kit-press` as the next step when appropriate.

@@ -5,17 +5,17 @@ export function configureHelp(program: Command): void {
     "after",
     `
 Examples:
-  product-kit add claude
-  product-kit add both
-  product-kit remove codex
-  product-kit check both
-  product-kit doctor claude
+  prd-kit add claude
+  prd-kit add both
+  prd-kit remove codex
+  prd-kit check both
+  prd-kit doctor claude
 `
   );
 
   program
     .command("help")
-    .description("Show help for product-kit")
+    .description("Show help for prd-kit")
     .action(() => {
       program.outputHelp();
     });

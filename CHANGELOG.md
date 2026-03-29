@@ -6,25 +6,25 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Renamed the published package, CLI, assistant command prefix, and managed manifest path to `product-kit`
-- Updated current-facing documentation, CLI help text, and packaged assistant assets to use `product-kit`
-- Updated current-facing repository guidance to use the `product-kit` name consistently
+- Renamed the published package, CLI, assistant command prefix, and managed manifest path to `prd-kit`
+- Updated current-facing documentation, CLI help text, and packaged assistant assets to use `prd-kit`
+- Updated current-facing repository guidance to use the `prd-kit` name consistently
 
 ## [0.2.0] - 2026-03-29
 
 ### Added
 
-- TypeScript-based `product-kit` CLI scaffolding with `add`, `remove`, `check`, `doctor`, `help`, and `version`
+- TypeScript-based `prd-kit` CLI scaffolding with `add`, `remove`, `check`, `doctor`, `help`, and `version`
 - Claude Code and Codex adapter structure with manifest-based ownership tracking
-- Versioned `assets/` tree for `/product-kit-*` assistant commands and shared `.product` templates
+- Versioned `assets/` tree for `/prd-kit-*` assistant commands and shared `.product` templates
 - Vitest-based unit and integration coverage for manifest and CLI lifecycle flows
 - GitHub Actions for CI and tag-driven release publishing to GitHub Releases and npm
 
 ### Changed
 
-- README now documents npm-first installation and direct `npx` execution for the `product-kit` CLI
+- README now documents npm-first installation and direct `npx` execution for the `prd-kit` CLI
 - `.npmignore` and package metadata prepared for npm distribution
-- npm package name is now `product-kit`
+- npm package name is now `prd-kit`
 
 ### Removed
 
@@ -44,6 +44,6 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Initial product-kit command set: `/pm-domain`, `/pm-press`, `/pm-faq`, and `/pm-align`
+- Initial prd-kit command set: `/pm-domain`, `/pm-press`, `/pm-faq`, and `/pm-align`
 - Product document templates for domain, press, FAQ, and requirements
 - Shell-based installer and README reorganization for the current Claude Code workflow

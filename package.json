@@ -1,11 +1,11 @@
 {
-  "name": "product-kit",
+  "name": "prd-kit",
   "version": "0.2.0",
-  "description": "product-kit CLI for installing product-management command assets into Claude Code and Codex projects",
+  "description": "prd-kit CLI for installing product-management command assets into Claude Code and Codex projects",
   "license": "MIT",
   "type": "module",
   "bin": {
-    "product-kit": "dist/cli/main.js"
+    "prd-kit": "dist/cli/main.js"
   },
   "files": [
     "dist",

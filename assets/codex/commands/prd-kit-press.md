@@ -2,7 +2,7 @@
 description: Provide the press release for the project following Amazon's Working Backwards methodology.
 handoffs:
   - label: Write FAQs
-    agent: product-kit-faq
+    agent: prd-kit-faq
     prompt: Write the FAQs that challenge this press release
 ---
 

@@ -17,8 +17,8 @@ afterEach(async () => {
 });
 
 describe("manifest helpers", () => {
-  it("writes and reads a manifest from the project-local .product-kit directory", async () => {
-    const rootDir = await mkdtemp(path.join(os.tmpdir(), "product-kit-manifest-"));
+  it("writes and reads a manifest from the project-local .prd-kit directory", async () => {
+    const rootDir = await mkdtemp(path.join(os.tmpdir(), "prd-kit-manifest-"));
     cleanupPaths.push(rootDir);
 
     const manifest = createEmptyManifest(rootDir, "0.1.0");
@@ -32,7 +32,7 @@ describe("manifest helpers", () => {
     await saveManifest(rootDir, manifest);
     const loaded = await loadManifest(rootDir);
 
-    expect(loaded?.productKitVersion).toBe("0.1.0");
+    expect(loaded?.prdKitVersion).toBe("0.1.0");
     expect(loaded?.targets[0]?.target).toBe("claude");
 
     const manifestPath = path.join(rootDir, MANIFEST_RELATIVE_PATH);

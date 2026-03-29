@@ -10,7 +10,7 @@ import type {
 import { pathExists, readText, writeJsonAtomic } from "../fs/project.js";
 
 export const MANIFEST_VERSION = "1";
-export const MANIFEST_RELATIVE_PATH = ".product-kit/manifest.json";
+export const MANIFEST_RELATIVE_PATH = ".prd-kit/manifest.json";
 
 const assetRecordSchema = z.object({
   id: z.string(),
@@ -32,7 +32,7 @@ const managedTargetStateSchema = z.object({
 
 const managedManifestSchema = z.object({
   manifestVersion: z.string(),
-  productKitVersion: z.string(),
+  prdKitVersion: z.string(),
   projectRoot: z.string(),
   targets: z.array(managedTargetStateSchema),
   sharedAssets: z.array(assetRecordSchema),
@@ -65,10 +65,10 @@ export async function removeManifest(rootDir: string): Promise<void> {
   }
 }
 
-export function createEmptyManifest(rootDir: string, productKitVersion: string): ManagedManifest {
+export function createEmptyManifest(rootDir: string, prdKitVersion: string): ManagedManifest {
   return {
     manifestVersion: MANIFEST_VERSION,
-    productKitVersion,
+    prdKitVersion,
     projectRoot: ".",
     targets: [],
     sharedAssets: [],

@@ -76,7 +76,7 @@ export async function runCheck(options: CheckOptions): Promise<CheckResult> {
       issues.push({
         code: "MANIFEST_MISSING",
         severity: "warning",
-        message: "Managed files exist but .product-kit/manifest.json is missing."
+        message: "Managed files exist but .prd-kit/manifest.json is missing."
       });
     }
 
@@ -93,8 +93,8 @@ export async function runCheck(options: CheckOptions): Promise<CheckResult> {
       status === "healthy"
         ? "No action needed."
         : status === "missing"
-          ? `Run \`product-kit add ${target}\` to install this integration.`
-          : `Run \`product-kit add ${target}\` to refresh managed files, then \`product-kit check ${target}\` again.`;
+          ? `Run \`prd-kit add ${target}\` to install this integration.`
+          : `Run \`prd-kit add ${target}\` to refresh managed files, then \`prd-kit check ${target}\` again.`;
 
     reports.push({
       target,

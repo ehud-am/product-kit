@@ -8,7 +8,7 @@ export interface AssetDefinition {
   targetPath: string;
 }
 
-const assistantCommands = ["product-kit-domain.md", "product-kit-press.md", "product-kit-faq.md", "product-kit-align.md"];
+const assistantCommands = ["prd-kit-domain.md", "prd-kit-press.md", "prd-kit-faq.md", "prd-kit-align.md"];
 const sharedTemplates = [
   "domain-template.md",
   "press-template.md",

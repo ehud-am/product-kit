@@ -2,7 +2,7 @@
 description: Provide domain knowledge as background context for the project.
 handoffs:
   - label: Write Press Release
-    agent: product-kit-press
+    agent: prd-kit-press
     prompt: Write the press release for the next release
 ---
 

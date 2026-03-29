@@ -17,9 +17,9 @@ async function main(): Promise<void> {
 
   const program = new Command();
   program
-    .name("product-kit")
-    .description("Manage product-kit project integrations for Claude Code and Codex")
-    .version(packageJson.version, "-V, --version", "Print the product-kit CLI version")
+    .name("prd-kit")
+    .description("Manage prd-kit project integrations for Claude Code and Codex")
+    .version(packageJson.version, "-V, --version", "Print the prd-kit CLI version")
     .showHelpAfterError();
 
   registerAddCommand(program, { rootDir, packageRoot, version: packageJson.version });

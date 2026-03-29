@@ -2,13 +2,13 @@
 description: Reconcile the .product folder with changes made in .specify specs — update press, faq, and requirements.
 handoffs:
   - label: Update Press Release
-    agent: product-kit-press
+    agent: prd-kit-press
     prompt: Refine the press release based on alignment findings
   - label: Update FAQs
-    agent: product-kit-faq
+    agent: prd-kit-faq
     prompt: Update the FAQs based on alignment findings
   - label: Update Domain
-    agent: product-kit-domain
+    agent: prd-kit-domain
     prompt: Update domain knowledge based on what we learned during alignment
 ---
 

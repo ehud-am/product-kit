@@ -2,7 +2,7 @@
 description: Create or update FAQs that challenge and support the press release claims.
 handoffs:
   - label: Update Press Release
-    agent: product-kit-press
+    agent: prd-kit-press
     prompt: Update the press release based on what we learned from the FAQs
   - label: Build Specification
     agent: speckit.specify
@@ -29,6 +29,6 @@ You are creating or updating the FAQ document at `.product/faq.md`.
 
 ### Execution Flow
 
-1. The text after `/product-kit-faq` describes what to generate or update.
+1. The text after `/prd-kit-faq` describes what to generate or update.
 2. Produce external and internal FAQs that challenge the current press release honestly.
 3. Preserve historical FAQ sections and suggest `/speckit.specify` when the feature is ready for engineering.
