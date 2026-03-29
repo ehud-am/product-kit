@@ -4,26 +4,26 @@ Auto-generated from all feature plans. Last updated: 2026-03-28
 
 ## Active Technologies
 
-- Markdown (Claude Code command files and templates — no runtime language)
-- Bash (optional installer script, future)
-- Python (optional, future installer)
+- TypeScript 5.x on Node.js 22 LTS
+- `commander`, `zod`, `vitest`, `tsx`, `typescript`
+- Versioned packaged assets under `assets/`
 
 ## Project Structure
 
 ```text
-.claude/commands/        # Claude Code slash command definitions (pm-*.md)
-.product/templates/      # Document templates (domain, press, faq, requirements)
-.product/                # Generated product documents (created at runtime)
+assets/                  # Packaged command and template assets
+src/                     # TypeScript CLI source
+tests/                   # Vitest unit and integration coverage
 .specify/                # spec-kit directory (not owned by pm-kit)
 specs/                   # Feature specs (spec-kit output)
 ```
 
 ## Commands
 
-- `/pm-domain` — create/update `.product/domain.md`
-- `/pm-press`  — create/update `.product/press.md`
-- `/pm-faq`    — create/update `.product/faq.md`
-- `/pm-align`  — reconcile `.product/` with `.specify/` specs; create/update `.product/requirements.md`
+- `pmkit add <target>` — install pm-kit assets into a project
+- `pmkit remove <target>` — remove only pm-kit managed assets for a target
+- `pmkit check [target]` — validate integration health
+- `pmkit doctor [target]` — show richer diagnostics and recovery guidance
 
 ## Code Style
 
@@ -33,9 +33,7 @@ specs/                   # Feature specs (spec-kit output)
 - No trailing whitespace; single blank line between sections
 
 ## Recent Changes
-- 002-install-script-readme: Added [if applicable, e.g., PostgreSQL, CoreData, files or N/A]
-
-- 001-pm-kit-commands: Initial four commands and four templates
+- 003-prime-time-cli: Added TypeScript CLI packaging, multi-agent assets, and npm-first distribution
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->

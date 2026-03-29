@@ -10,11 +10,18 @@ All notable changes to this project will be documented in this file.
 - Claude Code and Codex adapter structure with manifest-based ownership tracking
 - Versioned `assets/` tree for `/pmkit-*` assistant commands and shared `.product` templates
 - Vitest-based unit and integration coverage for manifest and CLI lifecycle flows
+- GitHub Actions for CI and tag-driven release publishing to GitHub Releases and npm
 
 ### Changed
 
-- README now documents the npm CLI workflow alongside the legacy shell installer
+- README now documents npm-first installation and direct `npx` execution for the `pmkit` CLI
 - `.npmignore` and package metadata prepared for npm distribution
+- npm package name is now `pm-kit` while the installed binary remains `pmkit`
+
+### Removed
+
+- Legacy `install.sh` installer
+- Legacy tracked `/pm-*` Claude command files from the repository root command set
 
 ## [2026-03-29]
 

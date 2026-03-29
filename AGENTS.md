@@ -5,27 +5,24 @@ Auto-generated from all feature plans. Last updated: 2026-03-29
 ## Active Technologies
 - TypeScript 5.x on Node.js 22 LTS + `commander` for CLI parsing, `zod` for config/state validation, `vitest` for test execution, `tsx` for local development, `typescript` for build/type-check (003-prime-time-cli)
 - File system only; project-local managed state in `.pmkit/manifest.json`; managed assets written into assistant command directories and `.product/templates/` (003-prime-time-cli)
-
-- Markdown (Codex command files and templates — no runtime language)
-- Bash (optional installer script, future)
-- Python (optional, future installer)
+- Markdown command and template assets packaged under `assets/` (003-prime-time-cli)
 
 ## Project Structure
 
 ```text
-.Codex/commands/        # Codex slash command definitions (pm-*.md)
-.product/templates/      # Document templates (domain, press, faq, requirements)
-.product/                # Generated product documents (created at runtime)
+assets/                  # Packaged command and template assets
+src/                     # TypeScript CLI source
+tests/                   # Vitest unit and integration coverage
 .specify/                # spec-kit directory (not owned by pm-kit)
 specs/                   # Feature specs (spec-kit output)
 ```
 
 ## Commands
 
-- `/pm-domain` — create/update `.product/domain.md`
-- `/pm-press`  — create/update `.product/press.md`
-- `/pm-faq`    — create/update `.product/faq.md`
-- `/pm-align`  — reconcile `.product/` with `.specify/` specs; create/update `.product/requirements.md`
+- `pmkit add <target>` — install pm-kit assets into a project
+- `pmkit remove <target>` — remove only pm-kit managed assets for a target
+- `pmkit check [target]` — validate integration health
+- `pmkit doctor [target]` — show richer diagnostics and recovery guidance
 
 ## Code Style
 
@@ -36,9 +33,6 @@ specs/                   # Feature specs (spec-kit output)
 
 ## Recent Changes
 - 003-prime-time-cli: Added TypeScript 5.x on Node.js 22 LTS + `commander` for CLI parsing, `zod` for config/state validation, `vitest` for test execution, `tsx` for local development, `typescript` for build/type-check
-- 002-install-script-readme: Added [if applicable, e.g., PostgreSQL, CoreData, files or N/A]
-
-- 001-pm-kit-commands: Initial four commands and four templates
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->

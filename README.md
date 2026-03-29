@@ -4,29 +4,15 @@ The product management counterpart to [spec-kit](https://github.com/github/spec-
 
 While spec-kit handles engineering specifications, pm-kit handles the product narrative: the domain context, press releases, FAQs, and requirements that define what you're building and why before spec-kit defines how.
 
-## Current Status
-
-pm-kit now includes a TypeScript-based CLI named `pmkit` for managing project integrations, alongside the older shell installer for the legacy Claude-only workflow.
-
-Current direction:
-- `pmkit` is the primary integration surface going forward
-- Claude Code and Codex are both supported targets
-- installed assistant commands use the `/pmkit-*` naming convention
-- project lifecycle commands are `add`, `remove`, `check`, `doctor`, `help`, and `version`
-
 ## Installation
 
-### Preferred CLI workflow
-
-From a local clone of this repository:
+### Recommended: install globally from npm
 
 ```sh
-npm install
-npm run build
-npm install -g .
+npm install -g pm-kit
 ```
 
-Then inside any target project:
+Then inside any project:
 
 ```sh
 pmkit add claude
@@ -35,37 +21,29 @@ pmkit add both
 pmkit check both
 ```
 
-### Local project install
+### Option 2: run directly without a global install
 
-If you want the CLI pinned in a single repo instead of installed globally:
-
-```sh
-npm install
-npm run build
-npm install --save-dev .
-npx pmkit add claude
-```
-
-### Legacy shell installer
-
-The older shell installer is still available for the legacy Claude-only `/pm-*` workflow:
+Because the npm package is named `pm-kit` while the binary is named `pmkit`, the one-command `npx` form is:
 
 ```sh
-curl -sSL https://raw.githubusercontent.com/ehud-am/pm-kit/main/install.sh | sh
+npx --yes --package pm-kit pmkit add claude
 ```
 
-This installs the four legacy pm-kit commands into `.claude/commands/` and the four templates into `.product/templates/` in your current directory.
-
-### Manual install
-
-If you prefer to copy files yourself:
+Use the same pattern for other commands:
 
 ```sh
-cp .claude/commands/pm-*.md /your-project/.claude/commands/
-cp -r .product/templates /your-project/.product/
+npx --yes --package pm-kit pmkit check both
 ```
 
-## Usage with `pmkit`
+### Option 3: install from GitHub source
+
+This is the least recommended path, but it is useful when testing unpublished changes:
+
+```sh
+npm install -g github:ehud-am/pm-kit
+```
+
+## CLI Usage
 
 Project integration commands:
 
@@ -74,22 +52,24 @@ pmkit add claude
 pmkit add codex
 pmkit add both
 pmkit remove claude
+pmkit remove codex
+pmkit remove both
 pmkit check both
 pmkit doctor both
 pmkit version
 pmkit help
 ```
 
-What they do:
-
 | Command | Purpose |
 |---------|---------|
-| `pmkit add <target>` | Add pmkit-managed assistant commands and shared templates to the current project |
-| `pmkit remove <target>` | Remove only pmkit-managed files for the selected target |
+| `pmkit add <target>` | Add pm-kit managed assistant commands and shared templates to the current project |
+| `pmkit remove <target>` | Remove only pm-kit managed files for the selected target |
 | `pmkit check [target]` | Validate that managed integrations are present and healthy |
 | `pmkit doctor [target]` | Show richer diagnostics and recovery guidance |
 | `pmkit version` | Print the installed CLI version |
 | `pmkit help` | Show command help and examples |
+
+## Assistant Commands
 
 After adding an integration, use the installed slash commands inside the assistant:
 
@@ -99,31 +79,6 @@ After adding an integration, use the installed slash commands inside the assista
 /pmkit-faq
 /pmkit-align
 ```
-
-## Legacy Usage in Claude Code
-
-In any Claude Code chat, type a command followed by your input:
-
-```text
-/pm-domain We're building a B2B SaaS tool that helps logistics managers track last-mile delivery in real time.
-
-/pm-press Write the press release for our first release — route optimization for small fleets.
-
-/pm-faq
-
-/pm-align
-```
-
-Each command reads text after the command name as its input. Commands with no required input, such as `/pm-faq` and `/pm-align`, can be invoked with no arguments and read context from the `.product/` files automatically.
-
-| Command | When to use |
-|---------|-------------|
-| `/pm-domain` | First, establish who your users are, what problem you're solving, and who the competitors are |
-| `/pm-press` | Write a press release as if the product has already shipped |
-| `/pm-faq` | Generate questions that challenge every press release claim |
-| `/pm-align` | After engineering specs exist, reconcile product docs with what is actually being built |
-
-## Assistant Targets
 
 | Target | Command directory | Slash commands |
 |--------|-------------------|----------------|
@@ -146,15 +101,15 @@ pm-kit creates a `.product/` folder in your project that maintains a living, cum
 ### Workflow
 
 ```text
-/pm-domain  -->  /pm-press  -->  /pm-faq  -->  /speckit.specify  -->  /pm-align
-  (context)     (promise)      (challenge)     (engineer)           (reconcile)
+/pmkit-domain  -->  /pmkit-press  -->  /pmkit-faq  -->  /speckit.specify  -->  /pmkit-align
+    (context)       (promise)         (challenge)       (engineer)             (reconcile)
 ```
 
-1. `/pmkit-domain` or `/pm-domain` establishes the domain context: who the users are, what problem matters, and who the alternatives are.
-2. `/pmkit-press` or `/pm-press` writes a press release as if the next release has already shipped.
-3. `/pmkit-faq` or `/pm-faq` challenges the press release with hard questions from customers and stakeholders.
+1. `/pmkit-domain` establishes the domain context: who the users are, what problem matters, and who the alternatives are.
+2. `/pmkit-press` writes a press release as if the next release has already shipped.
+3. `/pmkit-faq` challenges the press release with hard questions from customers and stakeholders.
 4. `/speckit.specify` hands off to spec-kit for engineering specifications.
-5. `/pmkit-align` or `/pm-align` reconciles product docs with the final engineering scope.
+5. `/pmkit-align` reconciles product docs with the final engineering scope.
 
 ## Key Concepts
 
@@ -173,9 +128,16 @@ The methodology is Amazon's PR/FAQ approach:
 - force hard questions early before committing engineering resources
 - treat the press release as a contract for value, clarity, and scope
 
+## Release and Publishing
+
+GitHub Actions now handles:
+- CI validation on pushes and pull requests
+- packaging tagged releases
+- publishing the npm package when a `v*` tag is pushed
+
 ## Requirements
 
-- Node.js and npm for the `pmkit` CLI workflow
+- Node.js and npm
 - [Claude Code](https://claude.ai/code) and/or Codex for assistant integration targets
 - [spec-kit](https://github.com/github/spec-kit) for the `/speckit.specify` portion of the workflow
 

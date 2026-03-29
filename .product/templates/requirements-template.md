@@ -8,7 +8,7 @@
   Unlike press.md and faq.md (which are organized by release), this document is organized
   by functional area and represents the complete product as it exists today.
 
-  This document is maintained by /pm-align, which reconciles it with the .specify/ specs
+  This document is maintained by /pmkit-align, which reconciles it with the .specify/ specs
   after engineering work is done.
 -->
 
