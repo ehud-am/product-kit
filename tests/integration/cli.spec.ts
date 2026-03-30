@@ -38,12 +38,12 @@ describe("product-spec CLI", () => {
     const manifest = JSON.parse(await readFile(path.join(projectDir, ".product-spec/manifest.json"), "utf8"));
     expect(manifest.targets).toHaveLength(2);
     expect(await readFile(path.join(projectDir, ".claude/commands/product-spec-domain.md"), "utf8")).toContain("/product-spec-domain");
-    expect(await readFile(path.join(projectDir, ".Codex/commands/product-spec-domain.md"), "utf8")).toContain(".product/domain.md");
-    expect(await readFile(path.join(projectDir, ".claude/commands/product-spec-narrative.md"), "utf8")).toContain(".product/narrative.md");
-    expect(await readFile(path.join(projectDir, ".Codex/commands/product-spec-roadmap.md"), "utf8")).toContain(".product/roadmap.md");
-    expect(await readFile(path.join(projectDir, ".product/templates/current-truth-template.md"), "utf8")).toContain("# Current Truth:");
+    expect(await readFile(path.join(projectDir, ".Codex/commands/product-spec-domain.md"), "utf8")).toContain("product/domain.md");
+    expect(await readFile(path.join(projectDir, ".claude/commands/product-spec-narrative.md"), "utf8")).toContain("product/narrative.md");
+    expect(await readFile(path.join(projectDir, ".Codex/commands/product-spec-roadmap.md"), "utf8")).toContain("product/roadmap.md");
+    expect(await readFile(path.join(projectDir, "product/templates/current-truth-template.md"), "utf8")).toContain("# Current Truth:");
     expect(
-      await readFile(path.join(projectDir, ".product/templates/history/current-truth-history-template.md"), "utf8")
+      await readFile(path.join(projectDir, "product/templates/history/current-truth-history-template.md"), "utf8")
     ).toContain("# Current Truth History:");
     expect(result.stdout).toContain("current-truth");
   });
@@ -59,21 +59,21 @@ describe("product-spec CLI", () => {
     expect(result.status).toBe(0);
     expect(result.stdout).toContain("Changed targets: claude");
     await expect(readFile(path.join(projectDir, ".claude/commands/manual.md"), "utf8")).resolves.toBe("manual");
-    await expect(readFile(path.join(projectDir, ".Codex/commands/product-spec-domain.md"), "utf8")).resolves.toContain(".product/domain.md");
+    await expect(readFile(path.join(projectDir, ".Codex/commands/product-spec-domain.md"), "utf8")).resolves.toContain("product/domain.md");
   });
 
   it("reports unhealthy state when a managed file drifts", async () => {
     const projectDir = await makeProjectDir("product-spec-check-");
 
     expect(runCli(projectDir, "add", "claude").status).toBe(0);
-    await rm(path.join(projectDir, ".product/templates/current-truth-template.md"));
+    await rm(path.join(projectDir, "product/templates/current-truth-template.md"));
 
     const check = runCli(projectDir, "check", "claude");
     const doctor = runCli(projectDir, "doctor", "claude");
 
     expect(check.status).toBe(0);
     expect(check.stdout).toContain("claude: unhealthy");
-    expect(check.stdout).toContain("Shared template is missing: .product/templates/current-truth-template.md");
+    expect(check.stdout).toContain("Shared template is missing: product/templates/current-truth-template.md");
     expect(doctor.stdout).toContain("current-truth");
     expect(doctor.stdout).toContain("Workflow reminder");
   });
@@ -90,12 +90,33 @@ describe("product-spec CLI", () => {
     await expect(readFile(path.join(projectDir, ".claude/commands/product-spec-align.md"), "utf8")).resolves.toContain(
       "current-truth.md"
     );
-    await expect(readFile(path.join(projectDir, ".product/templates/roadmap-template.md"), "utf8")).resolves.toContain(
+    await expect(readFile(path.join(projectDir, "product/templates/roadmap-template.md"), "utf8")).resolves.toContain(
       "## Committed Bets"
     );
-    await expect(readFile(path.join(projectDir, ".product/templates/narrative-template.md"), "utf8")).resolves.toContain(
+    await expect(readFile(path.join(projectDir, "product/templates/narrative-template.md"), "utf8")).resolves.toContain(
       "## Product Promise"
     );
+  });
+
+  it("migrates an existing /.product directory to /product on add", async () => {
+    const projectDir = await makeProjectDir("product-spec-migrate-");
+
+    await mkdir(path.join(projectDir, ".product", "templates"), { recursive: true });
+    await writeFile(path.join(projectDir, ".product", "domain.md"), "# Legacy domain\n", "utf8");
+    await writeFile(path.join(projectDir, ".product", "templates", "current-truth-template.md"), "legacy\n", "utf8");
+
+    const result = runCli(projectDir, "add", "claude");
+
+    expect(result.status).toBe(0);
+    await expect(readFile(path.join(projectDir, "product", "domain.md"), "utf8")).resolves.toContain("# Legacy domain");
+    await expect(readFile(path.join(projectDir, "product/templates/current-truth-template.md"), "utf8")).resolves.toContain(
+      "# Current Truth:"
+    );
+    await expect(readFile(path.join(projectDir, ".claude/commands/product-spec-domain.md"), "utf8")).resolves.toContain(
+      "product/domain.md"
+    );
+    await expect(readFile(path.join(projectDir, ".product", "domain.md"), "utf8")).rejects.toBeTruthy();
+    expect(result.stdout).toContain("Migrated legacy /.product content to /product.");
   });
 
   it("shows product-spec in the help output", async () => {

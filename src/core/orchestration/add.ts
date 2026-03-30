@@ -98,6 +98,7 @@ export async function runAdd(options: AddOptions): Promise<OperationSummary> {
     skippedTargets,
     files,
     notes: [
+      ...sharedInstall.notes,
       "Run `product-spec check` to validate the installed integrations.",
       "Installed workflow: domain -> press -> faq -> narrative -> roadmap -> speckit* -> align -> current-truth."
     ]

@@ -1,7 +1,7 @@
 # Current Truth: [PROJECT_NAME]
 
 **Last Updated**: [DATE]
-**Companion History**: [.product/history/current-truth-history.md](.product/history/current-truth-history.md)
+**Companion History**: [product/history/current-truth-history.md](product/history/current-truth-history.md)
 
 ## Product Summary
 

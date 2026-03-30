@@ -92,19 +92,19 @@ After adding an integration, use the installed slash commands inside the assista
 
 ## How It Works
 
-product-spec creates a `.product/` folder in your project that maintains a living view of the product across releases. Primary documents stay focused on the current state of thinking, while companion history documents preserve notable changes over time.
+product-spec creates a `product/` folder in your project that maintains a living view of the product across releases. Primary documents stay focused on the current state of thinking, while companion history documents preserve notable changes over time.
 
 ### Documents
 
 | File | Purpose |
 |------|---------|
-| `.product/domain.md` | Industry context, target users, terminology, competitive landscape |
-| `.product/press.md` | Current press release and customer-facing promise |
-| `.product/faq.md` | Current external and internal FAQs that challenge the promise |
-| `.product/narrative.md` | Durable internal story: customer, tension, future state, and principles |
-| `.product/roadmap.md` | Forward-looking sequencing of bets, phases, and dependencies |
-| `.product/current-truth.md` | Maintained current-state product specification grounded by alignment |
-| `.product/history/*.md` | Companion history files for key product artifacts |
+| `product/domain.md` | Industry context, target users, terminology, competitive landscape |
+| `product/press.md` | Current press release and customer-facing promise |
+| `product/faq.md` | Current external and internal FAQs that challenge the promise |
+| `product/narrative.md` | Durable internal story: customer, tension, future state, and principles |
+| `product/roadmap.md` | Forward-looking sequencing of bets, phases, and dependencies |
+| `product/current-truth.md` | Maintained current-state product specification grounded by alignment |
+| `product/history/*.md` | Companion history files for key product artifacts |
 
 ### Workflow
 
@@ -119,7 +119,7 @@ product-spec creates a `.product/` folder in your project that maintains a livin
 4. `/product-spec-narrative` turns the promise and challenge into a durable internal product story.
 5. `/product-spec-roadmap` sequences future bets and dependencies without replacing current truth.
 6. `/speckit.specify` hands off the next bet to spec-kit for engineering specifications.
-7. `/product-spec-align` reconciles product docs with the evolving engineering scope and maintains `.product/current-truth.md`.
+7. `/product-spec-align` reconciles product docs with the evolving engineering scope and maintains `product/current-truth.md`.
 
 ## Key Concepts
 
@@ -129,7 +129,7 @@ product-spec creates a `.product/` folder in your project that maintains a livin
 
 ### Companion History
 
-Primary product docs stay focused on the current state. Companion files under `.product/history/` preserve important prior decisions, revisions, and reasoning.
+Primary product docs stay focused on the current state. Companion files under `product/history/` preserve important prior decisions, revisions, and reasoning.
 
 ### Working Backwards
 

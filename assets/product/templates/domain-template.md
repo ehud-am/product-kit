@@ -1,7 +1,7 @@
 # Domain Knowledge: [PROJECT_NAME]
 
 **Last Updated**: [DATE]
-**Companion History**: [.product/history/domain-history.md](.product/history/domain-history.md)
+**Companion History**: [product/history/domain-history.md](product/history/domain-history.md)
 
 ## Industry Context
 

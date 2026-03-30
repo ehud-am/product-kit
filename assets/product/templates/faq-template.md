@@ -1,7 +1,7 @@
 # Frequently Asked Questions: [PROJECT_NAME]
 
 **Last Updated**: [DATE]
-**Companion History**: [.product/history/faq-history.md](.product/history/faq-history.md)
+**Companion History**: [product/history/faq-history.md](product/history/faq-history.md)
 
 ## [RELEASE_NAME] — [TARGET_DATE] *(upcoming)*
 

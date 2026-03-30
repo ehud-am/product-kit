@@ -1,7 +1,7 @@
 # Product Roadmap: [PROJECT_NAME]
 
 **Last Updated**: [DATE]
-**Companion History**: [.product/history/roadmap-history.md](.product/history/roadmap-history.md)
+**Companion History**: [product/history/roadmap-history.md](product/history/roadmap-history.md)
 
 ## Roadmap Summary
 

@@ -1,5 +1,10 @@
 import type { AssetCategory, AssistantTarget } from "../../types/index.js";
 
+export const PRODUCT_DOCS_DIR = "product";
+export const LEGACY_PRODUCT_DOCS_DIR = ".product";
+export const PRODUCT_TEMPLATES_DIR = `${PRODUCT_DOCS_DIR}/templates`;
+export const LEGACY_PRODUCT_TEMPLATES_DIR = `${LEGACY_PRODUCT_DOCS_DIR}/templates`;
+
 export interface AssetDefinition {
   id: string;
   category: AssetCategory;
@@ -60,7 +65,7 @@ function buildSharedAsset(
   subdir?: string
 ): AssetDefinition {
   const relativeDir = subdir ? `assets/product/templates/${subdir}` : "assets/product/templates";
-  const targetDir = subdir ? `.product/templates/${subdir}` : ".product/templates";
+  const targetDir = subdir ? `${PRODUCT_TEMPLATES_DIR}/${subdir}` : PRODUCT_TEMPLATES_DIR;
 
   return {
     id: `shared/${fileName.replace(/\.md$/, "")}`,

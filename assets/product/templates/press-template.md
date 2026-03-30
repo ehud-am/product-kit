@@ -1,7 +1,7 @@
 # Press Releases: [PROJECT_NAME]
 
 **Last Updated**: [DATE]
-**Companion History**: [.product/history/press-history.md](.product/history/press-history.md)
+**Companion History**: [product/history/press-history.md](product/history/press-history.md)
 
 <!--
   Keep the main document focused on the active upcoming or current press release.

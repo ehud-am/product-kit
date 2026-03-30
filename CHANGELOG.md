@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-03-30
+
+### Fixed
+
+- New installs now place managed product docs and shared templates under `product/` instead of `/.product/`
+- `product-spec add` now migrates an existing root `/.product/` directory to `product/` when no conflicting `product/` directory already exists
+- Health checks and packaged assistant assets now guide users toward `product/` consistently
+
 ## [0.4.0] - 2026-03-30
 
 ### Added

@@ -19,14 +19,14 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-You are creating or updating the FAQ document at `.product/faq.md`.
+You are creating or updating the FAQ document at `product/faq.md`.
 
 ### Pre-Execution
 
-1. Ensure `.product/` exists.
-2. Load `.product/domain.md` and `.product/press.md` when available.
-3. Load `.product/narrative.md`, `.product/roadmap.md`, and `.product/current-truth.md` when available so the FAQ work stays consistent with the rest of the product record.
-4. If `.product/faq.md` is missing, start from `.product/templates/faq-template.md`.
+1. Ensure `product/` exists.
+2. Load `product/domain.md` and `product/press.md` when available.
+3. Load `product/narrative.md`, `product/roadmap.md`, and `product/current-truth.md` when available so the FAQ work stays consistent with the rest of the product record.
+4. If `product/faq.md` is missing, start from `product/templates/faq-template.md`.
 
 ### Execution Flow
 

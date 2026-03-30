@@ -1,7 +1,7 @@
 # Product Narrative: [PROJECT_NAME]
 
 **Last Updated**: [DATE]
-**Companion History**: [.product/history/narrative-history.md](.product/history/narrative-history.md)
+**Companion History**: [product/history/narrative-history.md](product/history/narrative-history.md)
 
 ## Customer
 
