@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## [0.3.0] - 2026-03-30
+## [0.4.0] - 2026-03-30
 
 ### Added
 
@@ -18,6 +18,15 @@ All notable changes to this project will be documented in this file.
 - Replaced the live `requirements` concept with `current-truth.md` as the maintained current-state product specification
 - Redesigned the existing FRFAQ templates around a shared decision-oriented structure with companion history documents
 - Updated install, health-check, and doctor guidance to reflect the expanded workflow and asset bundle
+
+## [0.3.0] - 2026-03-29
+
+### Changed
+
+- Prepared the `v0.3.0` release to validate a clean GitHub Actions release cycle end to end
+- Renamed the published package, CLI, assistant command prefix, and managed manifest path to `product-spec`
+- Updated current-facing documentation, CLI help text, and packaged assistant assets to use `product-spec`
+- Updated current-facing repository guidance to use the `product-spec` name consistently
 
 ## [0.2.0] - 2026-03-29
 
