@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-04-03
+
+### Changed
+
+- New installs now place managed product docs and shared templates under `docs/product/` instead of `product/`
+- `product-spec add` now migrates an existing `product/` or `/.product/` directory to `docs/product/` when no conflicting canonical `docs/product/` directory already exists
+- Health checks, doctor guidance, README documentation, and packaged assistant assets now guide users toward `docs/product/` consistently
+
+### Fixed
+
+- Overlap scenarios where `docs/product/` already exists alongside a legacy product-doc directory now stay non-destructive and report manual reconciliation guidance instead of risking silent overwrites
+- Git and npm ignore rules now cover generated `docs/product/` output in addition to legacy generated product-doc locations
+
 ## [0.4.2] - 2026-04-02
 
 ### Fixed

@@ -1,6 +1,6 @@
 {
   "name": "product-spec",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "product-spec CLI for installing product-management command assets into Claude Code and Codex projects",
   "license": "MIT",
   "repository": {

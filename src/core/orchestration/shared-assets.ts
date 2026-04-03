@@ -4,6 +4,8 @@ import type { AssetRecord, ManagedManifest, OperationFileResult } from "../../ty
 import {
   LEGACY_PRODUCT_DOCS_DIR,
   LEGACY_PRODUCT_TEMPLATES_DIR,
+  PREVIOUS_PRODUCT_DOCS_DIR,
+  PREVIOUS_PRODUCT_TEMPLATES_DIR,
   PRODUCT_DOCS_DIR,
   sharedAssetRegistry
 } from "../assets/registry.js";
@@ -83,27 +85,78 @@ interface ProductDirectoryMigrationResult {
   notes: string[];
 }
 
+async function reportConflict(
+  rootDir: string,
+  sources: string[]
+): Promise<ProductDirectoryMigrationResult> {
+  const sourceList = sources.map((source) => `/${source}`).join(" and ");
+  const templateSources = await Promise.all(
+    [
+      LEGACY_PRODUCT_TEMPLATES_DIR,
+      PREVIOUS_PRODUCT_TEMPLATES_DIR
+    ]
+      .filter((templateDir) => sources.some((source) => templateDir.startsWith(source)))
+      .map(async (templateDir) => ((await pathExists(joinProjectPath(rootDir, templateDir))) ? `/${templateDir}` : null))
+  );
+  const existingTemplateSources = templateSources.filter((value): value is string => value !== null);
+
+  return {
+    files: [],
+    notes: [
+      existingTemplateSources.length > 0
+        ? `Legacy product docs still exist in ${sourceList} alongside /${PRODUCT_DOCS_DIR}. Existing /${PRODUCT_DOCS_DIR} content was left untouched; review and merge any remaining files manually, including templates in ${existingTemplateSources.join(" and ")}.`
+        : `Legacy product docs still exist in ${sourceList} alongside /${PRODUCT_DOCS_DIR}. Existing /${PRODUCT_DOCS_DIR} content was left untouched; review and merge any remaining files manually.`
+    ]
+  };
+}
+
 export async function migrateLegacyProductDirectory(rootDir: string): Promise<ProductDirectoryMigrationResult> {
   const legacyDir = joinProjectPath(rootDir, LEGACY_PRODUCT_DOCS_DIR);
+  const previousDir = joinProjectPath(rootDir, PREVIOUS_PRODUCT_DOCS_DIR);
   const productDir = joinProjectPath(rootDir, PRODUCT_DOCS_DIR);
+  const hasLegacyDir = await pathExists(legacyDir);
+  const hasPreviousDir = await pathExists(previousDir);
+  const hasCanonicalDir = await pathExists(productDir);
 
-  if (!(await pathExists(legacyDir))) {
+  if (!hasLegacyDir && !hasPreviousDir) {
     return { files: [], notes: [] };
   }
 
-  if (await pathExists(productDir)) {
-    const legacyTemplatesDir = joinProjectPath(rootDir, LEGACY_PRODUCT_TEMPLATES_DIR);
+  if (hasCanonicalDir) {
+    const sources = [hasPreviousDir ? PREVIOUS_PRODUCT_DOCS_DIR : null, hasLegacyDir ? LEGACY_PRODUCT_DOCS_DIR : null].filter(
+      (value): value is string => value !== null
+    );
+    return reportConflict(rootDir, sources);
+  }
+
+  if (hasLegacyDir && hasPreviousDir) {
     return {
       files: [],
       notes: [
-        await pathExists(legacyTemplatesDir)
-          ? "Legacy /.product content still exists alongside /product. Existing /product content was left untouched; review and merge any remaining files manually."
-          : "Legacy /.product content still exists alongside /product. Existing /product content was left untouched."
+        `Legacy product docs exist in /${LEGACY_PRODUCT_DOCS_DIR} and /${PREVIOUS_PRODUCT_DOCS_DIR}. product-spec now writes docs to /${PRODUCT_DOCS_DIR}; review and merge these directories manually before rerunning \`product-spec add\`.`
       ]
     };
   }
 
   await ensureDirectory(path.dirname(productDir));
+  if (hasPreviousDir) {
+    await rename(previousDir, productDir);
+
+    return {
+      files: [
+        {
+          path: PREVIOUS_PRODUCT_DOCS_DIR,
+          action: "removed"
+        },
+        {
+          path: PRODUCT_DOCS_DIR,
+          action: "created"
+        }
+      ],
+      notes: [`Migrated legacy /${PREVIOUS_PRODUCT_DOCS_DIR} content to /${PRODUCT_DOCS_DIR}.`]
+    };
+  }
+
   await rename(legacyDir, productDir);
 
   return {
@@ -117,6 +170,6 @@ export async function migrateLegacyProductDirectory(rootDir: string): Promise<Pr
         action: "created"
       }
     ],
-    notes: ["Migrated legacy /.product content to /product."]
+    notes: [`Migrated legacy /${LEGACY_PRODUCT_DOCS_DIR} content to /${PRODUCT_DOCS_DIR}.`]
   };
 }

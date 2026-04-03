@@ -19,14 +19,14 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-You are creating or updating the press release document at `product/press.md`.
+You are creating or updating the press release document at `docs/product/press.md`.
 
 ### Pre-Execution
 
-1. Ensure `product/` exists.
-2. Load `product/domain.md` if it exists.
-3. Load `product/faq.md`, `product/narrative.md`, and `product/current-truth.md` when present to keep the current press release aligned with the broader product record.
-4. Read `product/press.md` if it exists; otherwise use `product/templates/press-template.md`.
+1. Ensure `docs/product/` exists.
+2. Load `docs/product/domain.md` if it exists.
+3. Load `docs/product/faq.md`, `docs/product/narrative.md`, and `docs/product/current-truth.md` when present to keep the current press release aligned with the broader product record.
+4. Read `docs/product/press.md` if it exists; otherwise use `docs/product/templates/press-template.md`.
 
 ### Execution Flow
 

@@ -35,6 +35,7 @@ pnpm-debug.log*
 .Codex/
 
 # Generated local product/output state
+docs/product/
 product/
 .product/
 .product-spec/

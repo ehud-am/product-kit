@@ -2,6 +2,8 @@ import type { AssistantTarget, HealthIssue, HealthReport, RequestedTarget } from
 import {
   LEGACY_PRODUCT_DOCS_DIR,
   LEGACY_PRODUCT_TEMPLATES_DIR,
+  PREVIOUS_PRODUCT_DOCS_DIR,
+  PREVIOUS_PRODUCT_TEMPLATES_DIR,
   PRODUCT_DOCS_DIR,
   PRODUCT_TEMPLATES_DIR,
   getTargetAssetDefinitions,
@@ -81,21 +83,38 @@ export async function runCheck(options: CheckOptions): Promise<CheckResult> {
 
     const legacyProductDir = joinProjectPath(options.rootDir, LEGACY_PRODUCT_DOCS_DIR);
     const productDir = joinProjectPath(options.rootDir, PRODUCT_DOCS_DIR);
+    const previousProductDir = joinProjectPath(options.rootDir, PREVIOUS_PRODUCT_DOCS_DIR);
     const legacyTemplatesDir = joinProjectPath(options.rootDir, LEGACY_PRODUCT_TEMPLATES_DIR);
+    const previousTemplatesDir = joinProjectPath(options.rootDir, PREVIOUS_PRODUCT_TEMPLATES_DIR);
     const productTemplatesDir = joinProjectPath(options.rootDir, PRODUCT_TEMPLATES_DIR);
     const hasLegacyProductDir = await pathExists(legacyProductDir);
     const hasProductDir = await pathExists(productDir);
+    const hasPreviousProductDir = await pathExists(previousProductDir);
     const hasLegacyTemplatesDir = await pathExists(legacyTemplatesDir);
+    const hasPreviousTemplatesDir = await pathExists(previousTemplatesDir);
     const hasProductTemplatesDir = await pathExists(productTemplatesDir);
 
     if (hasLegacyProductDir) {
       issues.push({
         code: "LEGACY_PRODUCT_DIRECTORY",
+        severity: hasProductDir || hasPreviousProductDir ? "warning" : "error",
+        message: hasProductDir
+          ? `Legacy /.product directory still exists. product-spec now writes docs to /${PRODUCT_DOCS_DIR}.`
+          : hasPreviousProductDir
+            ? `Legacy /.product directory still exists alongside /${PREVIOUS_PRODUCT_DOCS_DIR}. product-spec now writes docs to /${PRODUCT_DOCS_DIR}.`
+            : `Legacy /.product directory detected. product-spec now writes docs to /${PRODUCT_DOCS_DIR}.`,
+        path: LEGACY_PRODUCT_DOCS_DIR
+      });
+    }
+
+    if (hasPreviousProductDir) {
+      issues.push({
+        code: "PREVIOUS_PRODUCT_DIRECTORY",
         severity: hasProductDir ? "warning" : "error",
         message: hasProductDir
-          ? "Legacy /.product directory still exists. product-spec now writes docs to /product."
-          : "Legacy /.product directory detected. product-spec now writes docs to /product.",
-        path: LEGACY_PRODUCT_DOCS_DIR
+          ? `Legacy /${PREVIOUS_PRODUCT_DOCS_DIR} directory still exists. product-spec now writes docs to /${PRODUCT_DOCS_DIR}.`
+          : `Legacy /${PREVIOUS_PRODUCT_DOCS_DIR} directory detected. product-spec now writes docs to /${PRODUCT_DOCS_DIR}.`,
+        path: PREVIOUS_PRODUCT_DOCS_DIR
       });
     }
 
@@ -103,8 +122,17 @@ export async function runCheck(options: CheckOptions): Promise<CheckResult> {
       issues.push({
         code: "LEGACY_TEMPLATE_DIRECTORY",
         severity: "warning",
-        message: "Shared templates are still stored in /.product/templates; rerun `product-spec add` to migrate them to /product/templates.",
+        message: `Shared templates are still stored in /.product/templates; rerun \`product-spec add\` to migrate them to /${PRODUCT_TEMPLATES_DIR}.`,
         path: LEGACY_PRODUCT_TEMPLATES_DIR
+      });
+    }
+
+    if (hasPreviousTemplatesDir && !hasProductTemplatesDir) {
+      issues.push({
+        code: "PREVIOUS_TEMPLATE_DIRECTORY",
+        severity: "warning",
+        message: `Shared templates are still stored in /${PREVIOUS_PRODUCT_TEMPLATES_DIR}; rerun \`product-spec add\` to migrate them to /${PRODUCT_TEMPLATES_DIR}.`,
+        path: PREVIOUS_PRODUCT_TEMPLATES_DIR
       });
     }
 
@@ -130,7 +158,7 @@ export async function runCheck(options: CheckOptions): Promise<CheckResult> {
         ? "No action needed."
         : status === "missing"
           ? `Run \`product-spec add ${target}\` to install this integration.`
-          : `Run \`product-spec add ${target}\` to refresh managed files and migrate legacy /.product content into /product when possible, then \`product-spec check ${target}\` again. The canonical workflow ends with \`current-truth.md\` maintained by \`align\`.`;
+          : `Run \`product-spec add ${target}\` to refresh managed files and migrate legacy /product or /.product content into /${PRODUCT_DOCS_DIR} when possible, then \`product-spec check ${target}\` again. The canonical workflow ends with \`current-truth.md\` maintained by \`align\`.`;
 
     reports.push({
       target,

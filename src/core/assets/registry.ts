@@ -1,8 +1,10 @@
 import type { AssetCategory, AssistantTarget } from "../../types/index.js";
 
-export const PRODUCT_DOCS_DIR = "product";
+export const PRODUCT_DOCS_DIR = "docs/product";
+export const PREVIOUS_PRODUCT_DOCS_DIR = "product";
 export const LEGACY_PRODUCT_DOCS_DIR = ".product";
 export const PRODUCT_TEMPLATES_DIR = `${PRODUCT_DOCS_DIR}/templates`;
+export const PREVIOUS_PRODUCT_TEMPLATES_DIR = `${PREVIOUS_PRODUCT_DOCS_DIR}/templates`;
 export const LEGACY_PRODUCT_TEMPLATES_DIR = `${LEGACY_PRODUCT_DOCS_DIR}/templates`;
 
 export interface AssetDefinition {

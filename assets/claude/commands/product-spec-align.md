@@ -1,5 +1,5 @@
 ---
-description: Reconcile the product folder with changes made in .specify specs — update product-facing docs and maintain current truth.
+description: Reconcile the docs/product folder with changes made in .specify specs — update product-facing docs and maintain current truth.
 handoffs:
   - label: Update Press Release
     agent: product-spec-press
@@ -25,13 +25,13 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-You are reconciling the product documents in `product/` with the engineering specifications in `.specify/`.
+You are reconciling the product documents in `docs/product/` with the engineering specifications in `.specify/`.
 
 ### Pre-Execution
 
-1. Load `product/domain.md`, `product/press.md`, `product/faq.md`, `product/narrative.md`, `product/roadmap.md`, and `product/current-truth.md` when present.
+1. Load `docs/product/domain.md`, `docs/product/press.md`, `docs/product/faq.md`, `docs/product/narrative.md`, `docs/product/roadmap.md`, and `docs/product/current-truth.md` when present.
 2. Discover all `spec.md` files under `.specify/`.
-3. Use `product/templates/current-truth-template.md` if `current-truth.md` does not yet exist.
+3. Use `docs/product/templates/current-truth-template.md` if `current-truth.md` does not yet exist.
 
 ### Execution Flow
 

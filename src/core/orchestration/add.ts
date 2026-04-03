@@ -100,7 +100,7 @@ export async function runAdd(options: AddOptions): Promise<OperationSummary> {
     notes: [
       ...sharedInstall.notes,
       "Run `product-spec check` to validate the installed integrations.",
-      "Installed workflow: domain -> press -> faq -> narrative -> roadmap -> speckit* -> align -> current-truth."
+      "Installed workflow: domain -> press -> faq -> narrative -> roadmap -> speckit* -> align -> current-truth under `docs/product/`."
     ]
   };
 }
